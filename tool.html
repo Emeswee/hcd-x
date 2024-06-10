@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Load plotly.js into the DOM -->
+    <title>HCD-X: Tool</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script type="module" src="tool.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module">
+        import { downloadCSV } from './main.js';
+        window.downloadCSV = downloadCSV;
+    </script>
+    <script src="d3-tip.js"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <div class="websiteTitle">
+        <h1>
+            <span class="sgce" onclick="window.location.href='index.html'">Historical Climate Data Explorer (HCD-X)</span>
+        </h1>
+        <nav>
+            <button class="menuButton" onclick="window.location.href='index.html'">Dataset Information</button>
+            <button class="menuButton" onclick="window.location.href='tool.html'">Tool</button>
+            <button class="menuButton" onclick="window.location.href='aboutus.html'">About Us</button>
+            <button class="menuButton" onclick="downloadCSV('REACHES1368_1911_test.csv')">Download .csv</button>
+        </nav>
+    </div>
+
+    <div class="mainContainer">
+        <div class="mapContainer"> 
+            <div class="control-panel">
+            <label for="select_event">Select event :</label>
+            <select id="select_event">
+                <option value="drought">Drought</option>
+                    <option value="famine">Famine</option>
+                    <option value="flood">Flood</option>
+                    <option value="rainfall">Rainfall</option>
+                    <option value="thunder">Thunder</option>
+                    <option value="wind">Wind</option>
+                    <option value="locust">Locust</option>
+                    <option value="snow">Snow</option>
+                    <option value="uncertain_crop">Uncertain Crop</option>
+                    <option value="crops">Crops</option>
+                    <option value="grain">Grain</option>
+                    <option value="pestilence">Pestilence</option>
+                    <option value="disaster_management">Disaster management</option>
+            </select>
+            <button id="generateButtonMap">Generate Map</button>
+            </div>
+            <svg id='map_container_SVG'></svg>
+        </div>
+        <div class="heatmapContainer"> 
+            <div class="control-panel">
+                <label for="event1_heatmap">Event 1:</label>
+                <select id="event1_heatmap">
+                    <option value="drought">Drought</option>
+                    <option value="famine">Famine</option>
+                    <option value="flood">Flood</option>
+                    <option value="rainfall">Rainfall</option>
+                    <option value="thunder">Thunder</option>
+                    <option value="wind">Wind</option>
+                    <option value="locust">Locust</option>
+                    <option value="snow">Snow</option>
+                    <option value="uncertain_crop">Uncertain Crop</option>
+                    <option value="crops">Crops</option>
+                    <option value="grain">Grain</option>
+                    <option value="pestilence">Pestilence</option>
+                    <option value="disaster_management">Disaster management</option>
+                </select>
+                <label for="event2_heatmap">Event 2:</label>
+                <select id="event2_heatmap">
+                    <option value="drought">Drought</option>
+                    <option value="famine">Famine</option>
+                    <option value="flood">Flood</option>
+                    <option value="rainfall">Rainfall</option>
+                    <option value="thunder">Thunder</option>
+                    <option value="wind">Wind</option>
+                    <option value="locust">Locust</option>
+                    <option value="snow">Snow</option>
+                    <option value="uncertain_crop">Uncertain Crop</option>
+                    <option value="crops">Crops</option>
+                    <option value="grain">Grain</option>
+                    <option value="pestilence">Pestilence</option>
+                    <option value="disaster_management">Disaster management</option>
+                </select>
+                <button id="generateButton">Generate Heatmap</button>
+            </div>
+            <svg id='heatmap_container_SVG'></svg>
+        </div>     
+        <div class="lineChartContainer"> 
+            <div class="control-panel">
+            <label for="base_province_line">Select base province :</label>
+            <select id="base_province_line">
+                <option value="北京">Beijing 北京</option>
+                <option value="天津">Tianjin 天津</option>
+                <option value="河北">Hebei 河北</option>
+                <option value="山西">Shanxi 山西</option>
+                <option value="內蒙古自治區">Inner Mongolia 內蒙</option>
+                <option value="遼寧">Liaoning 遼寧</option>
+                <option value="吉林">Jilin 吉林</option>
+                <option value="黑龍江">Heilongjiang 黑龍江</option>
+                <option value="上海">Shanghai 上海</option>
+                <option value="江蘇">Jiangsu 江蘇</option>
+                <option value="浙江">Zhejiang 浙江</option>
+                <option value="安徽">Anhui 安徽</option>
+                <option value="福建">Fujian 福建</option>
+                <option value="江西">Jiangxi 江西</option>
+                <option value="山東">Shandong 山東</option>
+                <option value="河南">Henan 河南</option>
+                <option value="湖北">Hubei 湖北</option>
+                <option value="湖南">Hunan 湖南</option>
+                <option value="廣東">Guangdong 廣東</option>
+                <option value="廣西壯族自治區">Guangxi 廣西</option>
+                <option value="海南">Hainan 海南</option>
+                <option value="重慶">Chongqing 重慶</option>
+                <option value="四川">Sichuan 四川</option>
+                <option value="貴州">Guizhou 貴州</option>
+                <option value="雲南">Yunnan 雲南</option>
+                <option value="西藏自治區">Tibet 西藏</option>
+                <option value="陝西">Shaanxi 陝西</option>
+                <option value="甘肅">Gansu 甘肅</option>
+                <option value="青海">Qinghai 青海</option>
+                <option value="寧夏回族自治區">Ningxia 寧夏</option>
+                <option value="新疆維吾爾自治區">Xinjiang 新疆</option>
+            </select>
+            <label for="compare_province_line">Select province to compare :</label>
+            <select id="compare_province_line">
+                <option value="北京">Beijing 北京</option>
+                <option value="天津">Tianjin 天津</option>
+                <option value="河北">Hebei 河北</option>
+                <option value="山西">Shanxi 山西</option>
+                <option value="內蒙古自治區">Inner Mongolia 內蒙</option>
+                <option value="遼寧">Liaoning 遼寧</option>
+                <option value="吉林">Jilin 吉林</option>
+                <option value="黑龍江">Heilongjiang 黑龍江</option>
+                <option value="上海">Shanghai 上海</option>
+                <option value="江蘇">Jiangsu 江蘇</option>
+                <option value="浙江">Zhejiang 浙江</option>
+                <option value="安徽">Anhui 安徽</option>
+                <option value="福建">Fujian 福建</option>
+                <option value="江西">Jiangxi 江西</option>
+                <option value="山東">Shandong 山東</option>
+                <option value="河南">Henan 河南</option>
+                <option value="湖北">Hubei 湖北</option>
+                <option value="湖南">Hunan 湖南</option>
+                <option value="廣東">Guangdong 廣東</option>
+                <option value="廣西壯族自治區">Guangxi 廣西</option>
+                <option value="海南">Hainan 海南</option>
+                <option value="重慶">Chongqing 重慶</option>
+                <option value="四川">Sichuan 四川</option>
+                <option value="貴州">Guizhou 貴州</option>
+                <option value="雲南">Yunnan 雲南</option>
+                <option value="西藏自治區">Tibet 西藏</option>
+                <option value="陝西">Shaanxi 陝西</option>
+                <option value="甘肅">Gansu 甘肅</option>
+                <option value="青海">Qinghai 青海</option>
+                <option value="寧夏回族自治區">Ningxia 寧夏</option>
+                <option value="新疆維吾爾自治區">Xinjiang 新疆</option>
+            </select>
+            <button id="generateButtonLine">Generate Line graph</button>
+            </div>
+            <svg id='line_chart_container_SVG'></svg>
+        </div>
+        <div class="networkContainer"> 
+            <div class="control-panel">
+            <label for="base_province">Select base province :</label>
+            <select id="base_province">
+                <option value="北京">Beijing 北京</option>
+                <option value="天津">Tianjin 天津</option>
+                <option value="河北">Hebei 河北</option>
+                <option value="山西">Shanxi 山西</option>
+                <option value="內蒙古自治區">Inner Mongolia 內蒙</option>
+                <option value="遼寧">Liaoning 遼寧</option>
+                <option value="吉林">Jilin 吉林</option>
+                <option value="黑龍江">Heilongjiang 黑龍江</option>
+                <option value="上海">Shanghai 上海</option>
+                <option value="江蘇">Jiangsu 江蘇</option>
+                <option value="浙江">Zhejiang 浙江</option>
+                <option value="安徽">Anhui 安徽</option>
+                <option value="福建">Fujian 福建</option>
+                <option value="江西">Jiangxi 江西</option>
+                <option value="山東">Shandong 山東</option>
+                <option value="河南">Henan 河南</option>
+                <option value="湖北">Hubei 湖北</option>
+                <option value="湖南">Hunan 湖南</option>
+                <option value="廣東">Guangdong 廣東</option>
+                <option value="廣西壯族自治區">Guangxi 廣西</option>
+                <option value="海南">Hainan 海南</option>
+                <option value="重慶">Chongqing 重慶</option>
+                <option value="四川">Sichuan 四川</option>
+                <option value="貴州">Guizhou 貴州</option>
+                <option value="雲南">Yunnan 雲南</option>
+                <option value="西藏自治區">Tibet 西藏</option>
+                <option value="陝西">Shaanxi 陝西</option>
+                <option value="甘肅">Gansu 甘肅</option>
+                <option value="青海">Qinghai 青海</option>
+                <option value="寧夏回族自治區">Ningxia 寧夏</option>
+                <option value="新疆維吾爾自治區">Xinjiang 新疆</option>
+            </select>
+            <button id="generateButtonArc">Generate arc diagram</button>
+            <div id="arc_diagram"></div>
+            <br>Confidence Threshold</br>
+            <input type="range" min="0" max="1" step="0.1" value="0" style="width: 450px; height: 50px;" id="sliderNetwork">
+                <p id="sliderNetworkValue"></p>
+            </div>
+            <svg id='network_container_SVG'></svg>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

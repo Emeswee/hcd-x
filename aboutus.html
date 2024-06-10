@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Load plotly.js into the DOM -->
+    <title>HCD-X: About Us</title>
+    <link rel="stylesheet" type="text/css" href="style_main.css">
+</head>
+
+<body>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script type="module" src="main.js"></script>
+    <script type="module">
+        import { downloadCSV } from './main.js';
+        window.downloadCSV = downloadCSV;
+    </script>
+    <script type="module" src="aboutus.js"></script>
+    <script src="d3-tip.js"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <div class="websiteTitle">
+        <h1>
+            <span class="sgce" onclick="window.location.href='index.html'">Historical Climate Data Explorer (HCD-X)</span>
+        </h1>
+        <nav>
+            <button class="menuButton" onclick="window.location.href='index.html'">Dataset Information</button>
+            <button class="menuButton" onclick="window.location.href='tool.html'">Tool</button>
+            <button class="menuButton" onclick="window.location.href='aboutus.html'">About Us</button>
+            <button class="menuButton" onclick="downloadCSV('REACHES1368_1911_test.csv')">Download .csv</button>
+        </nav>
+    </div>
+
+    <div class="mainContainer">
+        <svg id='aboutUs_SVG'></svg>
+    </div>
+
+    </body>

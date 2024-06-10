@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, sans-serif;
+}
+
+.websiteTitle {
+    position: fixed;
+    top: -5px;
+    display: flex;
+    justify-content: flex-start; /* Align everything to the left */
+    align-items: center; /* Center vertically within the container */
+    color: #000000;
+    background-color: rgb(236, 222, 176);
+    width: 100%;
+    padding: 0px 5px; /* Add padding for better spacing */
+    z-index: 100; /* Set a high z-index to ensure it's visually above other elements */
+}
+
+.websiteTitle h1 {
+    margin-right: 15px; /* Add margin to separate the title from buttons */
+}
+.sgce {
+    font-size: 24px; /* Adjust font size for SGCE */
+    position: relative;
+    top: -3px;
+    left: 14px;
+}
+
+.subgroup-cohort-explorer {
+    font-size: 18px; /* Adjust font size for SubGroup Cohort Explorer */
+    position: relative;
+    top: -3px;
+    left: 12px;
+    
+}
+
+.menuButton {
+    position: relative;
+    padding: 13px 0px 10px 15px; /* Adjust padding for better button appearance */
+    margin-right: 5px; /* Add margin between buttons */
+    background-color: transparent; /* Set background color to transparent */
+    color: #000000; /* Set text color to transparent */
+    border: none;
+    cursor: pointer;
+}
+
+.menuButton::after {
+    content: '\25BE'; /* Unicode character for downward arrow */
+    font-size: 20px; /* Adjust font size as needed */
+    margin-left: 3px; /* Add margin between text and arrow */
+    position: relative;
+    top: -1px;
+}
+.menuButton:hover {
+    background-color: transparent; /* Change button background color on hover */
+    color: #5d5d5d; /* Change text color on hover */
+}
+
+.mainContainer {
+    margin-top: 40px;
+    height: calc(100vh - 40px);
+    overflow: hidden;
+    position: relative; /* Ensure relative positioning for z-index to work */
+    z-index: 0; /* Set a base z-index for the parent container */
+}
+
+.d3-tip {
+    line-height: 1.5;
+    padding: 5px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 8px;
+    position: fixed;
+    pointer-events: none;
+    top: var(--mouse-y);
+    left: calc(var(--mouse-x) - 50px); /* Adjusted the left property */
+    transform: translate(0%, 150%);
+    z-index: 2;
+}
+
+.leftContainer{
+    width: 900px;
+    height: 830px; 
+    position: absolute; 
+    left: 5px;
+    top:20px;
+    outline: 5px double black;
+}
+#left_container_SVG {
+    width: 900px;
+    height: 830px;
+    position: absolute;
+    left: 0px; 
+}
+
+.rightContainer{
+    width: 900px;
+    height: 830px; 
+    position: absolute; 
+    left: 950px;
+    top:20px;
+    outline: 5px double black;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#right_container_SVG {
+    width: 900px;
+    height: 1050px;
+    position: absolute;
+    left: 0px; 
+}
+
+.buttonContainer {
+    position: absolute; /* Position the container */
+    left: 300px; /* Adjust left position */
+    top: 700px; /* Adjust top position */
+    z-index: 20; /* Set the stacking order */
+}
+
+.tryTool {
+    background-color: #c8a75b; /* Green background */
+    border: none; /* Remove border */
+    color: black; /* Black text */
+    padding: 15px 32px; /* Padding */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Display as inline block */
+    font-size: 40px; /* Font size */
+    cursor: pointer; /* Cursor style */
+    border-radius: 8px; /* Rounded corners */
+    transition-duration: 0.4s; /* Animation duration */
+}
+
+.tryTool:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+
+/* for ABOUT US CSS*/
+#aboutUs_SVGG {
+    width: 1800px;
+    height: 1050px;
+    position: absolute;
+    left: 0px; 
+}
